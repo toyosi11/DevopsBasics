@@ -13,31 +13,31 @@ pipeline{
 		stage('gitclone') {
 
 		      steps {
-		         git 'https://github.com/theitern/DevopsBasics.git'
+		         git 'https://github.com/toyosi11/DevopsBasics.git'
 		      }
 		}
 		
 		stage('Build') {
 			steps {
 			
-			   sh 'docker build -t akinaregbesola/class_app:${BUILD_NUMBER} .'
+			   sh 'docker build -t toyosi11/myapp:${BUILD_NUMBER} .'
 			}
 		}
 		
 		stage('Login') {
 		
 			steps {
-			   sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login --username akinaregbesola --password-stdin'    
+			   sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login --username toyosi11 --password-stdin'    
 			}
 		}
 
 		stage('Push') {
 			
 			steps {
-			   sh 'docker push akinaregbesola/class_app:${BUILD_NUMBER}'
+			   sh 'docker push toyosi11/myapp:${BUILD_NUMBER}'
 			}
 		}
-	}
+		}
 	
 	post {
 	    always {
@@ -46,6 +46,4 @@ pipeline{
     }
 
 }
-
-
 
